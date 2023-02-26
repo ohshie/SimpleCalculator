@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Class="AvaloniaApplication1.MainWindow"
+        Title="Calculator"
+        Height="220"
+        Width="200"
+        MinHeight="150"
+        MinWidth="120"
+        Background="black">
+    
+    <Window.Styles>
+        <Style Selector="Button.Numbers">
+            <Setter Property="Background" Value="#CCCCCC" />
+        </Style>
+        
+        <Style Selector="Button.Numbers:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#E5D7CC" />
+        </Style>
+        
+        <Style Selector="Button.Operators">
+            <Setter Property="Background" Value="#EF7D2B" />
+        </Style>
+        <Style Selector="Button.Operators:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#EB6402" />
+        </Style>
+    </Window.Styles>
+    
+    <Grid RowDefinitions="*,3*">
+            <Grid Grid.Row="0">
+                <TextBox x:Name="TextBox" TextAlignment="Right" VerticalAlignment="Center" Foreground="white" Background="black" 
+                         BorderBrush="transparent" IsHitTestVisible="False" IsReadOnly="True" FontSize="30"></TextBox>
+            </Grid>
+            
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*">
+                
+                <Button Classes="Numbers" x:Name="ButtonSeven" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonSeven_OnClick">7</Button>
+                <Button Classes="Numbers" x:Name="ButtonEight" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonEight_OnClick">8</Button>
+                <Button Classes="Numbers" x:Name="ButtonNine" Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonNine_OnClick">9</Button>
+                <Button Classes="Operators" x:Name="ButtonSum" Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonSum_OnClick">+</Button>
+                
+                <Button Classes="Numbers" x:Name="ButtonFour" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonFour_OnClick">4</Button>
+                <Button Classes="Numbers" x:Name="ButtonFive" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonFive_OnClick">5</Button>
+                <Button Classes="Numbers" x:Name="ButtonSix" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonSix_OnClick">6</Button>
+                <Button Classes="Operators" x:Name="ButtonMinus" Grid.Row="1" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonMinus_OnClick">-</Button>
+                
+                <Button Classes="Numbers" x:Name="ButtonOne" Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonOne_OnClick">1</Button>
+                <Button Classes="Numbers" x:Name="ButtonTwo" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonTwo_OnClick">2</Button>
+                <Button Classes="Numbers" x:Name="ButtonTree" Grid.Row="2" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonTree_OnClick">3</Button>
+                <Button Classes="Operators" x:Name="ButtonMult" Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonMult_OnClick">*</Button>
+                
+                <Button Classes="Numbers" x:Name="ButtonZero" Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonZero_OnClick">0</Button>
+                <Button Classes="Operators" x:Name="ButtonClear" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonClear_OnClick">C</Button>
+                <Button Classes="Operators" x:Name="ButtonEqual" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonEqual_OnClick">=</Button>
+                <Button Classes="Operators" x:Name="ButtonDivide" Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonDivide_OnClick">/</Button>
+            </Grid>
+    </Grid>
+</Window>
