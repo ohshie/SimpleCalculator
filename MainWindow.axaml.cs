@@ -1,17 +1,11 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using NCalc;
 
 namespace AvaloniaApplication1;
 
 public partial class MainWindow : Window
 {
-    private int _numberA;
-    private int _numberB;
-    private int Tempnumber;
-    
     public MainWindow()
     {
         InitializeComponent();
@@ -68,32 +62,55 @@ public partial class MainWindow : Window
 
     private void ButtonMult_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (HasNumbers())
+            return;
+        
         TextBox.Text += "*";
     }
     
     private void ButtonClear_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (HasNumbers())
+            return;
+        
         TextBox.Text = "";
     }
     
     private void ButtonDivide_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (HasNumbers())
+            return;
+        
         TextBox.Text += "/";
     }
     
     private void ButtonMinus_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (HasNumbers())
+            return;
+        
         TextBox.Text += "-";
     }
     
     private void ButtonSum_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (HasNumbers())
+            return;
+        
         TextBox.Text += "+";
     }
     
     private void ButtonEqual_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (HasNumbers())
+            return;
+        
         Expression expression = new Expression(TextBox.Text);
         TextBox.Text = expression.Evaluate().ToString();
+    }
+    
+    private bool HasNumbers()
+    {
+        return string.IsNullOrEmpty(TextBox.Text);
     }
 }

@@ -7,8 +7,10 @@
         Title="Calculator"
         Height="220"
         Width="200"
-        MinHeight="150"
+        MinHeight="180"
         MinWidth="120"
+        d:DesignHeight="300"
+        d:DesignWidth="300"
         Background="black">
     
     <Window.Styles>
@@ -26,11 +28,14 @@
         <Style Selector="Button.Operators:pointerover /template/ ContentPresenter">
             <Setter Property="Background" Value="#EB6402" />
         </Style>
+        <Style Selector="Button.Operators:disabled /template/ ContentPresenter">
+            <Setter Property="Background" Value="#EB6402" />
+        </Style>
     </Window.Styles>
     
-    <Grid RowDefinitions="*,3*">
-            <Grid Grid.Row="0">
-                <TextBox x:Name="TextBox" TextAlignment="Right" VerticalAlignment="Center" Foreground="white" Background="black" 
+    <Grid RowDefinitions="Auto,3*">
+            <Grid Grid.Row="0" RowDefinitions="Auto">
+                <TextBox x:Name="TextBox" Foreground="white" Background="black" TextAlignment="Right" Margin="2"
                          BorderBrush="transparent" IsHitTestVisible="False" IsReadOnly="True" FontSize="30"></TextBox>
             </Grid>
             
