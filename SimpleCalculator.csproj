@@ -1,12 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <OutputType>WinExe</OutputType>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <AssemblyName>SimpleCalculator</AssemblyName>
         <RootNamespace>SimpleCalculator</RootNamespace>
+    </PropertyGroup>
+    <PropertyGroup>
+        <RuntimeIdentifiers>osx-x64;win-x64</RuntimeIdentifiers>
+    </PropertyGroup>
+    <PropertyGroup>
+        <UseAppHost>True</UseAppHost>
     </PropertyGroup>
     <ItemGroup>
         <None Remove=".gitignore" />
@@ -21,7 +27,61 @@
         <PackageReference Include="Avalonia.Desktop" Version="0.10.18" />
         <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
         <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.18" />
+        <PackageReference Include="DotNet.Bundle" Version="0.9.13" />
         <PackageReference Include="ncalc" Version="1.3.8" />
+        <PackageReference Include="NSubsys" Version="1.0.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\images\ListOpen.png" />
+      <AvaloniaResource Include="Assets\images\ListOpen.png" />
+      <None Remove="Assets\images\ListClose.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <IconSet Include="simplecalculator.iconset" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="simplecalculator.iconset\icon_16x16.png" />
+      <Resource Include="simplecalculator.iconset\icon_16x16.png" />
+      <None Remove="simplecalculator.iconset\icon_16x16@2x.png" />
+      <Resource Include="simplecalculator.iconset\icon_16x16@2x.png" />
+      <None Remove="simplecalculator.iconset\icon_32x32.png" />
+      <Resource Include="simplecalculator.iconset\icon_32x32.png" />
+      <None Remove="simplecalculator.iconset\icon_32x32@2x.png" />
+      <Resource Include="simplecalculator.iconset\icon_32x32@2x.png" />
+      <None Remove="simplecalculator.iconset\icon_128x128.png" />
+      <Resource Include="simplecalculator.iconset\icon_128x128.png" />
+      <None Remove="simplecalculator.iconset\icon_128x128@2x.png" />
+      <Resource Include="simplecalculator.iconset\icon_128x128@2x.png" />
+      <None Remove="simplecalculator.iconset\icon_256x256.png" />
+      <Resource Include="simplecalculator.iconset\icon_256x256.png" />
+      <None Remove="simplecalculator.iconset\icon_256x256@2x.png" />
+      <Resource Include="simplecalculator.iconset\icon_256x256@2x.png" />
+      <None Remove="simplecalculator.iconset\icon_512x512.png" />
+      <Resource Include="simplecalculator.iconset\icon_512x512.png" />
+      <None Remove="simplecalculator.iconset\icon_512x512@2x.png" />
+      <Resource Include="simplecalculator.iconset\icon_512x512@2x.png" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <CFBundleName>SimpleCalculator</CFBundleName> <!-- Also defines .app file name -->
+        <CFBundleDisplayName>SimpleCalculator</CFBundleDisplayName>
+        <CFBundleIdentifier>com.ohshie.calculator</CFBundleIdentifier>
+        <CFBundleVersion>0.9.0</CFBundleVersion>
+        <CFBundleShortVersionString>0.9.0</CFBundleShortVersionString>
+        <CFBundlePackageType>APPL</CFBundlePackageType>
+        <CFBundleSignature>com.ohshie.calculator</CFBundleSignature>
+        <CFBundleExecutable>SimpleCalculator</CFBundleExecutable>
+        <CFBundleSupportedPlatforms>MacOSX</CFBundleSupportedPlatforms>
+        <CFBundleIconFile>simplecalculator.icns</CFBundleIconFile> <!-- Will be copied from output directory -->
+        <NSPrincipalClass>NSApplication</NSPrincipalClass>
+        <NSHighResolutionCapable>true</NSHighResolutionCapable>
+    </PropertyGroup>
+    
 </Project>

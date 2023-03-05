@@ -3,63 +3,155 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        x:Class="AvaloniaApplication1.MainWindow"
+        x:Class="SimpleCalculator.MainWindow"
         Title="Calculator"
-        Height="220"
-        Width="200"
-        MinHeight="180"
-        MinWidth="120"
-        d:DesignHeight="300"
-        d:DesignWidth="300"
-        Background="black">
-    
+        CanResize="False"
+        Height="500" Width="300"
+        d:DesignHeight="500" d:DesignWidth="300"
+        x:Name="CalculatorWindow"
+        Classes="CalcMainWindow"
+        CornerRadius="20">
     <Window.Styles>
-        <Style Selector="Button.Numbers">
-            <Setter Property="Background" Value="#CCCCCC" />
+
+        <Style Selector="TitleBar">
+            <Setter Property="Background" Value="black"></Setter>
         </Style>
         
-        <Style Selector="Button.Numbers:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="#E5D7CC" />
+        <!-- Previous calculations list --> 
+        <Style Selector="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        </Style>
+        <Style Selector="ListBoxItem:pointerover/template/ContentPresenter">
+            <Setter Property="TextBox.Foreground" Value="#9F63E3"></Setter>
         </Style>
         
-        <Style Selector="Button.Operators">
-            <Setter Property="Background" Value="#EF7D2B" />
-        </Style>
-        <Style Selector="Button.Operators:pointerover /template/ ContentPresenter">
-            <Setter Property="Background" Value="#EB6402" />
-        </Style>
-        <Style Selector="Button.Operators:disabled /template/ ContentPresenter">
-            <Setter Property="Background" Value="#EB6402" />
-        </Style>
     </Window.Styles>
     
-    <Grid RowDefinitions="Auto,3*">
-            <Grid Grid.Row="0" RowDefinitions="Auto">
-                <TextBox x:Name="TextBox" Foreground="white" Background="black" TextAlignment="Right" Margin="2"
-                         BorderBrush="transparent" IsHitTestVisible="False" IsReadOnly="True" FontSize="30"></TextBox>
+    <Grid ColumnDefinitions="*,Auto">
+        
+        <!-- Main Calculator window -->
+        <Grid Grid.Column="0" RowDefinitions="Auto,Auto,3*" Margin="10">
+            <!-- open list button -->
+            <Button Grid.Row="0" Tag="PanelToggle" x:Name="PanelToggle" Width="30" Height="30" HorizontalAlignment="Right" Click="Button_ListToggle">
+                <Image Source="Assets/images/ListOpen.png" Stretch="UniformToFill"/>
+                <Button.Styles>
+                    <Style Selector="Button">
+                        <Setter Property="Background" Value="transparent"></Setter>
+                    </Style>
+                    <Style Selector="Button /template/ContentPresenter">
+                        <Setter Property="RenderTransform" Value="scale(1)"></Setter>
+                        <Setter Property="Transitions">
+                            <Transitions>
+                                <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.08"/>
+                            </Transitions>
+                        </Setter>
+                    </Style>
+                    
+                    <Style Selector="Button:pointerover /template/ContentPresenter">
+                        <Setter Property="Background" Value="transparent"></Setter>
+                        <Setter Property="RenderTransform" Value="scale(1.2)"></Setter>
+                    </Style>
+                    
+                </Button.Styles>
+            </Button>
+            
+            <!-- Main Calculator Window -->
+            <Grid Grid.Row="1" RowDefinitions="Auto">
+            
+            <!-- Display -->
+            <TextBox x:Name="TextBox" Foreground="white" Background="black" TextAlignment="Right" Margin="2"
+                     BorderBrush="transparent" IsHitTestVisible="False" IsReadOnly="false" FontSize="30"
+                     Height="120"
+                     VerticalContentAlignment="Bottom"
+                     BorderThickness="5"
+                     TextWrapping="Wrap"/>
             </Grid>
             
-            <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*">
+            <!-- Operands and operator buttons -->
+            <Grid Grid.Row="2" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*">
                 
-                <Button Classes="Numbers" x:Name="ButtonSeven" Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonSeven_OnClick">7</Button>
-                <Button Classes="Numbers" x:Name="ButtonEight" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonEight_OnClick">8</Button>
-                <Button Classes="Numbers" x:Name="ButtonNine" Grid.Row="0" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonNine_OnClick">9</Button>
-                <Button Classes="Operators" x:Name="ButtonSum" Grid.Row="0" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonSum_OnClick">+</Button>
+                <Grid.Styles>
+                <!-- Most of the buttons -->
+                <Style Selector="Button">
+                    <Setter Property="Margin" Value="3"/>
+                    <Setter Property="Height" Value="60"/>
+                    <Setter Property="Width" Value="64"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+        
+                <!-- NUMBERS style -->
+                <Style Selector="Button.Numbers">
+                    <Setter Property="Background" Value="#D5D5D5" />
+                    <Setter Property="Foreground" Value="black"/>
+                </Style>
+                <Style Selector="Button.Numbers:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="#C3B9CE" />
+                    <Setter Property="TextBlock.Foreground" Value="black"></Setter>
+                </Style>
+        
+                <!-- Operators Style -->
+                <Style Selector="Button.Operators">
+                    <Setter Property="Background" Value="#731DD8"/>
+                    <Setter Property="FontWeight" Value="Black"></Setter>
+                </Style>
+                <Style Selector="Button.Operators:pointerover /template/ ContentPresenter">
+                    <Setter Property="Background" Value="#9F63E3" />
+                </Style>
                 
-                <Button Classes="Numbers" x:Name="ButtonFour" Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonFour_OnClick">4</Button>
-                <Button Classes="Numbers" x:Name="ButtonFive" Grid.Row="1" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonFive_OnClick">5</Button>
-                <Button Classes="Numbers" x:Name="ButtonSix" Grid.Row="1" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonSix_OnClick">6</Button>
-                <Button Classes="Operators" x:Name="ButtonMinus" Grid.Row="1" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonMinus_OnClick">-</Button>
+                </Grid.Styles>
                 
-                <Button Classes="Numbers" x:Name="ButtonOne" Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonOne_OnClick">1</Button>
-                <Button Classes="Numbers" x:Name="ButtonTwo" Grid.Row="2" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonTwo_OnClick">2</Button>
-                <Button Classes="Numbers" x:Name="ButtonTree" Grid.Row="2" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonTree_OnClick">3</Button>
-                <Button Classes="Operators" x:Name="ButtonMult" Grid.Row="2" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonMult_OnClick">*</Button>
+                <Button Classes="Operators" Tag="OpenParenthesis" x:Name="ButtonOpenParent" Grid.Row="0" Grid.Column="0" Click="FieldButton_Click">(</Button>
+                <Button Classes="Operators" Tag="CloseParenthesis" x:Name="ButtonCloseParent" Grid.Row="0"  Grid.Column="1" Click="FieldButton_Click">)</Button>
+                <Button Classes="Operators" Tag="Percent" x:Name="Percent" Grid.Row="0" Grid.Column="2" Click="FieldButton_Click">%</Button>
+                <Button Classes="Operators" Tag="Clear" x:Name="ButtonClear" Grid.Row="0" Grid.Column="3" Click="FieldButton_Click">C</Button>
                 
-                <Button Classes="Numbers" x:Name="ButtonZero" Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Click="ButtonZero_OnClick">0</Button>
-                <Button Classes="Operators" x:Name="ButtonClear" Grid.Row="3" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonClear_OnClick">C</Button>
-                <Button Classes="Operators" x:Name="ButtonEqual" Grid.Row="3" Grid.Column="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonEqual_OnClick">=</Button>
-                <Button Classes="Operators" x:Name="ButtonDivide" Grid.Row="3" Grid.Column="3" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" FontWeight="Black" Click="ButtonDivide_OnClick">/</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonSeven" Grid.Row="1" Grid.Column="0" Click="FieldButton_Click">7</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonEight" Grid.Row="1" Grid.Column="1" Click="FieldButton_Click">8</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonNine" Grid.Row="1" Grid.Column="2" Click="FieldButton_Click">9</Button>
+                <Button Classes="Operators" Tag="Operators" x:Name="ButtonSum" Grid.Row="1" Grid.Column="3" Click="FieldButton_Click">+</Button>
+                    
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonFour" Grid.Row="2" Grid.Column="0" Click="FieldButton_Click">4</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonFive" Grid.Row="2" Grid.Column="1" Click="FieldButton_Click">5</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonSix" Grid.Row="2" Grid.Column="2" Click="FieldButton_Click">6</Button>
+                <Button Classes="Operators" Tag="Operators" x:Name="ButtonMinus" Grid.Row="2" Grid.Column="3" Click="FieldButton_Click">-</Button>
+                    
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonOne" Grid.Row="3" Grid.Column="0" Click="FieldButton_Click">1</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonTwo" Grid.Row="3" Grid.Column="1" Click="FieldButton_Click">2</Button>
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonTree" Grid.Row="3" Grid.Column="2" Click="FieldButton_Click">3</Button>
+                <Button Classes="Operators" Tag="Operators" x:Name="ButtonMult" Grid.Row="3" Grid.Column="3" Click="FieldButton_Click">*</Button>
+                    
+                <Button Classes="Numbers" Tag="Numbers" x:Name="ButtonZero" Grid.Row="4" Grid.Column="0" Click="FieldButton_Click">0</Button>
+                <Button Classes="Operators" Tag="Comma" x:Name="ButtonComma"  Grid.Row="4" Grid.Column="1" Click="FieldButton_Click">.</Button>
+                <Button Classes="Operators" Tag="Equals" x:Name="ButtonEqual" Grid.Row="4" Grid.Column="2" Click="FieldButton_Click">=</Button>
+                <Button Classes="Operators" Tag="Operators" x:Name="ButtonDivide" Grid.Row="4" Grid.Column="3" Click="FieldButton_Click">/</Button>
             </Grid>
+        </Grid>
+        
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <Rectangle x:Name="RectangleSeparator" Height="480"  Fill="#9F63E3"
+                       IsVisible="False"
+                       Width="0"
+                       VerticalAlignment="Center" Opacity="0.4"/>
+            <!-- Previous calculations pannel -->
+            <ScrollViewer x:Name="PreviousCalcListPanel" 
+                          IsVisible="false"
+                          Width="0"
+                          Classes="PreviousCalcListPanel">
+                <ListBox
+                    x:Name="PreviousCalcList" 
+                    Margin="4" 
+                    Height="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=Height}"
+                    Items="{Binding _previousCalculations}"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    Background="black"
+                    CornerRadius="10,10,10,10"
+                    SelectionMode="Single"
+                    SelectionChanged="PreviousCalcList_OnSelectionChanged">
+                </ListBox>
+            </ScrollViewer>
+        </StackPanel>
     </Grid>
+    
 </Window>
