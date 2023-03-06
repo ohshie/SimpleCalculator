@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -19,5 +20,11 @@ public partial class App : Application
         }
 
         base.OnFrameworkInitializationCompleted();
+    }
+
+    private void NativeMenuItem_OnClick(object? sender, EventArgs e)
+    {
+        About about = new About();
+        about.Show();
     }
 }

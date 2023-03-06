@@ -1,7 +1,14 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             x:Class="SimpleCalculator.App">
+             x:Class="SimpleCalculator.App"
+             Name="FluidCalculator">
     <Application.Styles>
         <FluentTheme Mode="Dark"/>
     </Application.Styles>
+    
+        <NativeMenu.Menu>
+            <NativeMenu>
+                <NativeMenuItem Header="Kekw" Click="NativeMenuItem_OnClick"></NativeMenuItem>
+            </NativeMenu>
+        </NativeMenu.Menu>
 </Application>

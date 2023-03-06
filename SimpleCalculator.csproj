@@ -5,15 +5,14 @@
         <Nullable>enable</Nullable>
         <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
         <ApplicationManifest>app.manifest</ApplicationManifest>
-        <AssemblyName>SimpleCalculator</AssemblyName>
-        <RootNamespace>SimpleCalculator</RootNamespace>
+        <AssemblyName>FluidCalculator</AssemblyName>
+        <RootNamespace>FluidCalculator</RootNamespace>
     </PropertyGroup>
+    
     <PropertyGroup>
-        <RuntimeIdentifiers>osx-x64;win-x64</RuntimeIdentifiers>
+        <RuntimeIdentifiers>osx-x64;osx-arm64</RuntimeIdentifiers>
     </PropertyGroup>
-    <PropertyGroup>
-        <UseAppHost>True</UseAppHost>
-    </PropertyGroup>
+    
     <ItemGroup>
         <None Remove=".gitignore" />
     </ItemGroup>
@@ -40,48 +39,22 @@
       <None Remove="Assets\images\ListOpen.png" />
       <AvaloniaResource Include="Assets\images\ListOpen.png" />
       <None Remove="Assets\images\ListClose.png" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <IconSet Include="simplecalculator.iconset" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <None Remove="simplecalculator.iconset\icon_16x16.png" />
-      <Resource Include="simplecalculator.iconset\icon_16x16.png" />
-      <None Remove="simplecalculator.iconset\icon_16x16@2x.png" />
-      <Resource Include="simplecalculator.iconset\icon_16x16@2x.png" />
-      <None Remove="simplecalculator.iconset\icon_32x32.png" />
-      <Resource Include="simplecalculator.iconset\icon_32x32.png" />
-      <None Remove="simplecalculator.iconset\icon_32x32@2x.png" />
-      <Resource Include="simplecalculator.iconset\icon_32x32@2x.png" />
-      <None Remove="simplecalculator.iconset\icon_128x128.png" />
-      <Resource Include="simplecalculator.iconset\icon_128x128.png" />
-      <None Remove="simplecalculator.iconset\icon_128x128@2x.png" />
-      <Resource Include="simplecalculator.iconset\icon_128x128@2x.png" />
-      <None Remove="simplecalculator.iconset\icon_256x256.png" />
-      <Resource Include="simplecalculator.iconset\icon_256x256.png" />
-      <None Remove="simplecalculator.iconset\icon_256x256@2x.png" />
-      <Resource Include="simplecalculator.iconset\icon_256x256@2x.png" />
-      <None Remove="simplecalculator.iconset\icon_512x512.png" />
-      <Resource Include="simplecalculator.iconset\icon_512x512.png" />
-      <None Remove="simplecalculator.iconset\icon_512x512@2x.png" />
-      <Resource Include="simplecalculator.iconset\icon_512x512@2x.png" />
+      <None Remove="Assets\images\GitHub.png" />
+      <AvaloniaResource Include="Assets\images\GitHub.png" />
+      <None Remove="Assets\images\Flag.png" />
+      <AvaloniaResource Include="Assets\images\Flag.png" />
     </ItemGroup>
 
     <PropertyGroup>
-        <CFBundleName>SimpleCalculator</CFBundleName> <!-- Also defines .app file name -->
-        <CFBundleDisplayName>SimpleCalculator</CFBundleDisplayName>
-        <CFBundleIdentifier>com.ohshie.calculator</CFBundleIdentifier>
-        <CFBundleVersion>0.9.0</CFBundleVersion>
-        <CFBundleShortVersionString>0.9.0</CFBundleShortVersionString>
+        <CFBundleName>FluidCalculator</CFBundleName> <!-- Also defines .app file name -->
+        <CFBundleIdentifier>com.ohshie.simpcal</CFBundleIdentifier>
+        <CFBundleVersion>1.0.0</CFBundleVersion>
         <CFBundlePackageType>APPL</CFBundlePackageType>
-        <CFBundleSignature>com.ohshie.calculator</CFBundleSignature>
+        <CFBundleSignature>????</CFBundleSignature>
         <CFBundleExecutable>SimpleCalculator</CFBundleExecutable>
-        <CFBundleSupportedPlatforms>MacOSX</CFBundleSupportedPlatforms>
-        <CFBundleIconFile>simplecalculator.icns</CFBundleIconFile> <!-- Will be copied from output directory -->
+        <CFBundleIconName>simplecalculator.icns</CFBundleIconName> <!-- Will be copied from output directory -->
         <NSPrincipalClass>NSApplication</NSPrincipalClass>
         <NSHighResolutionCapable>true</NSHighResolutionCapable>
+        <CFBundleShortVersionString>1.0.0</CFBundleShortVersionString>
     </PropertyGroup>
-    
 </Project>
